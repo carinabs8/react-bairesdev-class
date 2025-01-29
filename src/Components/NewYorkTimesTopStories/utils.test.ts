@@ -10,4 +10,5 @@ test('calls topStories', async () => {
   axios.get.mockImplementation(() => Promise.resolve(requestResponse));
   await topStories({setTopStoriesHome});
   expect(setTopStoriesHome).toHaveBeenCalled();
+  expect(setTopStoriesHome).toHaveBeenLastCalledWith(requestResponse.data.results)
 });
