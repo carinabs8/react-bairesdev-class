@@ -11,16 +11,15 @@ import { StoryType } from '../../../Types';
 
 type NewYorkStoryType = {
   story: StoryType;
-  key: number;
+  id: number;
 };
 
 export const NewYorkStory = (params: NewYorkStoryType) => {
-
-  const {story, story: {section, multimedia, title}, key } = params;
+  const {story, story: {section, multimedia, title}, id } = params;
   const {caption: multimediaCaption, url: multimediaUrl} = multimedia[0];
 
   return(
-    <Card sx={{ maxWidth: 345 }} key={key}>
+    <Card sx={{ maxWidth: 345 }} key={id}>
       <CardMedia
         sx={{ height: 140 }}
         image={multimediaUrl} title={multimediaCaption}

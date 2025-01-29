@@ -26,11 +26,7 @@ export const NewYorkTimesTopStories = () => {
         }}
       >
       {
-        topStoriesHome.map((story:StoryType, key:number) => {
-          return(
-            <NewYorkStory story={story} key={key}/>
-          )
-        })
+        topStoriesHome.map((story:StoryType, id:number) =>  <NewYorkStory story={story} id={id}/> )
       }
       </Box>
     </React.Fragment>

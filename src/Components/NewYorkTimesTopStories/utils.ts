@@ -16,7 +16,8 @@ export const topStories = (params:TopStoriesType) => {
     }
   })
   .then(function (response) {
-    setTopStoriesHome(response.data.results)
+    const { data: { results: responseResults }} = response;
+    setTopStoriesHome(responseResults)
   })
   .catch(function (error) {
     console.log(error);
