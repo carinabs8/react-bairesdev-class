@@ -1,4 +1,4 @@
-type StoryMultimedia = {
+interface StoryMultimedia {
   caption: string;
   copyright: string;
   format: string;
@@ -7,10 +7,12 @@ type StoryMultimedia = {
   type: string;
   url: string;
   width: number;
-}
+};
 
-export type StoryType = {
+type MultimediasType = Array<StoryMultimedia> | [];
+
+export interface StoryType{
   section: string;
   title: string;
-  multimedia: Array<StoryMultimedia> | []
+  multimedia: MultimediasType;
 };

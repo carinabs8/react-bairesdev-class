@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 import { StoryType } from '../../../Types';
 
-type NewYorkStoryType = {
+interface NewYorkStoryType {
   story: StoryType;
   id: number;
 };

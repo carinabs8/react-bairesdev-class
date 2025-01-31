@@ -7,7 +7,8 @@ jest.mock("axios");
 
 test('calls topStories', async () => {
   const setTopStoriesHome = jest.fn();
-  axios.get.mockImplementation(() => Promise.resolve(requestResponse));
+  const mockAddListener = jest.spyOn(axios, 'get')
+  mockAddListener.mockImplementation(() => Promise.resolve(requestResponse));
   await topStories({setTopStoriesHome});
   expect(setTopStoriesHome).toHaveBeenCalled();
   expect(setTopStoriesHome).toHaveBeenLastCalledWith(requestResponse.data.results)
