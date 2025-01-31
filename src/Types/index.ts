@@ -9,10 +9,12 @@ interface StoryMultimedia {
   width: number;
 };
 
-type MultimediasType = Array<StoryMultimedia> | [];
+export type MultimediasType = Array<StoryMultimedia> | [];
 
 export interface StoryType{
   section: string;
   title: string;
+  abstract: string;
+  des_facet: Array<string>;
   multimedia: MultimediasType;
 };
