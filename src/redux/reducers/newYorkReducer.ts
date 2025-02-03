@@ -16,10 +16,10 @@ export const newYorkSlice = createSlice({
   name: 'newYorkStory',
   initialState,
   reducers: {
-    changeState: (state, action) => ({...state, ...action.payload})
+    setState: (state, action) => ({...state, ...action.payload})
   },
 })
 
-export const { changeState } = newYorkSlice.actions
+export const { setState } = newYorkSlice.actions
 
 export default newYorkSlice.reducer

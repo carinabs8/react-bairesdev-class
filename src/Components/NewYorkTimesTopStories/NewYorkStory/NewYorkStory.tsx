@@ -12,27 +12,26 @@ import { DetailedNewYorkStory } from './DetailedNewYorkStory';
 
 import { StoryType } from '../../../Types';
 
-import { changeState } from '../../../redux/reducers/newYorkReducer';
+import { setState } from '../../../redux/reducers/newYorkReducer';
 
 interface NewYorkStoryType {
   story: StoryType;
-  id: number;
 };
 
 const detailedNewYorkStory = (event: React.MouseEvent<HTMLElement>, setDisplayModal: (displayModal: boolean) => void, dispatch: any, story: StoryType) => {
-  dispatch?.(changeState(story));
+  dispatch?.(setState(story));
   setDisplayModal(true)
 }
 
 export const NewYorkStory = (params: NewYorkStoryType) => {
-  const {story, story: {section, multimedia, title}, id } = params;
+  const { story, story: { section, multimedia, title }} = params;
   const {caption: multimediaCaption, url: multimediaUrl} = multimedia[0];
   const [displayModal, setDisplayModal] = useState(false);
   const dispatch = useDispatch();
 
   return(
     <React.Fragment>
-      <Card sx={{ maxWidth: 345 }} key={id}>
+      <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 140 }}
           image={multimediaUrl} title={multimediaCaption}
