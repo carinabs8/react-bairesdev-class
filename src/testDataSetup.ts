@@ -9,6 +9,7 @@ export const requestResponse = {
         key: 1,
         title: topStoryTitle,
         abstract: topStoryAbstract,
+        des_facet: [],
         multimedia: [
           {
             caption: 'caption',

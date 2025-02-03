@@ -31,7 +31,7 @@ export const DetailedNewYorkStory = ({displayModal, setDisplayModal}: DetailedNe
     transform: 'translate(-50%, -50%)',
   };
 
-  if(!setDisplayModal) return null;
+  if(!displayModal) return null;
 
   return(
     <React.Fragment>
