@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,12 +12,15 @@ import { DetailedNewYorkStory } from './DetailedNewYorkStory';
 
 import { StoryType } from '../../../Types';
 
+import { changeState } from '../../../redux/reducers/newYorkReducer';
+
 interface NewYorkStoryType {
   story: StoryType;
   id: number;
 };
 
-const detailedNewYorkStory = (event: React.MouseEvent<HTMLElement>, setDisplayModal: (displayModal: boolean) => void, story: StoryType) => {
+const detailedNewYorkStory = (event: React.MouseEvent<HTMLElement>, setDisplayModal: (displayModal: boolean) => void, dispatch: any, story: StoryType) => {
+  dispatch?.(changeState(story));
   setDisplayModal(true)
 }
 
@@ -24,6 +28,7 @@ export const NewYorkStory = (params: NewYorkStoryType) => {
   const {story, story: {section, multimedia, title}, id } = params;
   const {caption: multimediaCaption, url: multimediaUrl} = multimedia[0];
   const [displayModal, setDisplayModal] = useState(false);
+  const dispatch = useDispatch();
 
   return(
     <React.Fragment>
@@ -41,10 +46,10 @@ export const NewYorkStory = (params: NewYorkStoryType) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={(event) => detailedNewYorkStory(event, setDisplayModal, story)}>Check it out</Button>
+          <Button size="small" onClick={(event) => detailedNewYorkStory(event, setDisplayModal, dispatch, story)}>Check it out</Button>
         </CardActions>
       </Card>
-      { displayModal && <DetailedNewYorkStory story={story} displayModal={displayModal} setDisplayModal={setDisplayModal}/> }
+      { displayModal && <DetailedNewYorkStory displayModal={displayModal} setDisplayModal={setDisplayModal}/> }
     </React.Fragment>
   );
 };

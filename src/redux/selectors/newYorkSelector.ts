@@ -1,0 +1,1 @@
+export const newYorkSelector = (state:any) => state.newYorkReducer;

@@ -1,0 +1,1 @@
+export { newYorkSelector } from './newYorkSelector';

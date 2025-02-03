@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -12,16 +13,17 @@ import Modal from '@mui/material/Modal';
 
 import { StoryType } from '../../../../Types';
 
+import { newYorkSelector } from '../../../../redux/selectors'
+
 interface DetailedNewYorkStoryType {
-  story: StoryType,
   displayModal: boolean,
   setDisplayModal: (displayModal: boolean) => void,
 };
 
-export const DetailedNewYorkStory = ({story, displayModal, setDisplayModal}: DetailedNewYorkStoryType) => {
+export const DetailedNewYorkStory = ({displayModal, setDisplayModal}: DetailedNewYorkStoryType) => {
   const handleClose = () => setDisplayModal(false);
 
-  const { multimedia: multimedias, title, section, abstract, des_facet } = story;
+  const { multimedia: multimedias, title, section, abstract, des_facet } = useSelector(newYorkSelector, shallowEqual);
   const {caption: multimediaCaption, url: multimediaUrl} = multimedias[0];
 
   const style = {
