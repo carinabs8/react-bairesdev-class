@@ -31,7 +31,7 @@ export const NewYorkStory = (params: NewYorkStoryType) => {
 
   return(
     <React.Fragment>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} title={title}>
         <CardMedia
           sx={{ height: 140 }}
           image={multimediaUrl} title={multimediaCaption}

@@ -59,13 +59,13 @@ export const DetailedNewYorkStory = ({displayModal, setDisplayModal}: DetailedNe
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {abstract}
               </Typography>
-              <Typography sx={{marginTop: '5px'}}>
-                {des_facet.map((item: string) => {
+              <div style={{marginTop: '5px'}}>
+                {des_facet.map((item: string, key:number) => {
                   return(
-                    <Chip>{item}</Chip>
+                    <Chip key={key}>{item}</Chip>
                   )
                 })}
-              </Typography>
+              </div>
             </CardContent>
             <CardActions>
               <Button size="small" onClick={handleClose}>Close</Button>
