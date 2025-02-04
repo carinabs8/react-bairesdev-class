@@ -11,14 +11,13 @@ import { createStore } from 'redux';
 import store from '../../../../redux/store';
 
 import { requestResponse, topStoryTitle, topStoryAbstract } from '../../../../testDataSetup';
-import { topStories} from './utils';
 
 import * as reactRedux from 'react-redux';
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
 }));
 
-const useSelectorMock = reactRedux.useSelector;
+const useSelectorMock = reactRedux.useSelector as jest.MockedFunction<typeof reactRedux.useSelector>;
 
 describe('DetailedNewYorkStory', () => {
   beforeEach(() => {
@@ -26,7 +25,7 @@ describe('DetailedNewYorkStory', () => {
   });
 
   afterEach(() => {
-    useSelectorMock.mockClear();
+    jest.resetAllMocks();
   });
 
   test('renders DetailedNewYorkStory', () => {

@@ -19,7 +19,7 @@ jest.mock("react-redux", () => ({
   useDispatch: jest.fn()
 }));
 
-const useSelectorMock = reactRedux.useSelector;
+const useSelectorMock = reactRedux.useSelector as jest.MockedFunction<typeof reactRedux.useSelector>;
 
 describe('DetailedNewYorkStory', () => {
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('DetailedNewYorkStory', () => {
   });
 
   afterEach(() => {
-    useSelectorMock.mockClear();
+    jest.resetAllMocks()
   });
 
   test('renders NewYorkTimesTopStories', async () => {

@@ -22,6 +22,7 @@ export const DetailedNewYorkStory = ({displayModal, setDisplayModal}: DetailedNe
   const handleClose = () => setDisplayModal(false);
 
   const { multimedia: multimedias, title, section, abstract, des_facet } = useSelector(newYorkSelector, shallowEqual);
+
   const {caption: multimediaCaption, url: multimediaUrl} = multimedias[0];
 
   const style = {
