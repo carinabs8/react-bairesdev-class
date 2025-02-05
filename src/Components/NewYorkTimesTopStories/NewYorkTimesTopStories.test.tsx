@@ -21,7 +21,7 @@ jest.mock("react-redux", () => ({
 
 const useSelectorMock = reactRedux.useSelector as jest.MockedFunction<typeof reactRedux.useSelector>;
 
-describe('DetailedNewYorkStory', () => {
+describe('Galery Top stories', () => {
   beforeEach(() => {
     useSelectorMock.mockReturnValue(requestResponse.data.results[0])
   });
