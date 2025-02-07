@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Children } from 'react';
 
 import Box from '@mui/material/Box';
@@ -13,12 +13,18 @@ const style = {
   transform: 'translate(-50%, -50%)',
 };
 
-export const Modal = (props:{
-  children: any, open: boolean, onClose: (displayModal: boolean) => void,
-  ariaLabelledby: any, ariaDescribedby: any}) => {
-  const {children, open, onClose, ariaLabelledby, ariaDescribedby } = props;
+interface ModalPropsType {
+  children?: React.ReactNode,
+  open: boolean,
+  onClose: (displayModal: boolean) => void,
+  ariaLabelledby?: string,
+  ariaDescribedby?: string
+}
 
-  if(children.length === 0) return null;
+export const Modal = (props: ModalPropsType) => {
+  const { children, open, onClose, ariaLabelledby, ariaDescribedby} = props;
+
+  if(!children) return null;
 
   return(
     <React.Fragment>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import Card from '@mui/material/Card';
@@ -25,8 +25,7 @@ export const DetailedNewYorkStory = ({displayModal, setDisplayModal}: DetailedNe
 
   const { multimedia: multimedias, title, section, abstract, des_facet } = useSelector(newYorkSelector, shallowEqual);
 
-  const {caption: multimediaCaption, url: multimediaUrl} = multimedias[0];
-
+  const {caption: multimediaCaption, url: multimediaUrl} = (multimedias.length >= 0 ) ? multimedias[0] : {caption: '', url: ''};
 
   const handleDisplayInternalModal = () => {
     setDisplayInternalModal(true);
@@ -42,9 +41,7 @@ export const DetailedNewYorkStory = ({displayModal, setDisplayModal}: DetailedNe
     <React.Fragment>
       <Modal
         open={displayModal}
-        onClose={handleClose}
-        ariaLabelledby="modal-modal-title"
-        ariaDescribedby="modal-modal-description"
+        onClose={handleClose}  ariaLabelledby='New York Story' ariaDescribedby='New York Story Detail'
       >
         <Card sx={{ maxWidth: 345 }}>
           <CardMedia
@@ -71,13 +68,13 @@ export const DetailedNewYorkStory = ({displayModal, setDisplayModal}: DetailedNe
             </div>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={handleClose}>Close</Button>
             <Button size="small" onClick={handleDisplayInternalModal}>Share this Story</Button>
+            <Button size="small" onClick={handleClose}>Close</Button>
           </CardActions>
         </Card>
       </Modal>
 
-      <RequestDetailedStory handleDisplayInternalModalClose={handleDisplayInternalModalClose} setDisplayInternalModal={setDisplayInternalModal} displayInternalModal={displayInternalModal}/>
+      <RequestDetailedStory handleOnClose={handleDisplayInternalModalClose} displayInternalModal={displayInternalModal}/>
     </React.Fragment>
   )
 };
