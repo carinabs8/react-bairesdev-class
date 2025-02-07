@@ -43,9 +43,9 @@ describe('Galery Top stories', () => {
     });
 
     //check https://testing-library.com/docs/queries/about for more info
-    expect(screen.getByText(topStoryTitle)).toBeTruthy;
+    expect(screen.getByText(topStoryTitle)).toBeTruthy();
     fireEvent.click(screen.getByText('Check it out'));
-    expect(screen.getByText(topStoryAbstract)).toBeTruthy;
+    expect(screen.getByText(topStoryAbstract)).toBeTruthy();
     fireEvent.click(
       within(screen.getByRole('presentation')).getByText('Close')
     );
