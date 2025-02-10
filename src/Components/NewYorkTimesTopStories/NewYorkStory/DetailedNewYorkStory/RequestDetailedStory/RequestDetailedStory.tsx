@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,8 +13,8 @@ import Typography from '@mui/material/Typography';
 
 import { Modal } from '../../../../Modal';
 
-import { newYorkSelector } from '../../../../../redux/selectors';
-
+import { newYorkSelector, requestNewYorkStoryDetailFormSelector } from '../../../../../redux/selectors';
+import { setState } from '../../../../../redux/reducers/requestNewYorkStoryDetailFormReducer';
 
 interface RequestDetailedStoryType {
   displayInternalModal: boolean,
@@ -25,7 +25,27 @@ export const RequestDetailedStory = ({
   displayInternalModal, handleOnClose
 }: RequestDetailedStoryType ) => {
   const { title } = useSelector(newYorkSelector, shallowEqual);
+  const formDetailed = useSelector(requestNewYorkStoryDetailFormSelector, shallowEqual);
   const ariaLabel = { 'aria-label': 'description' };
+  const dispatch = useDispatch();
+
+  const submitForm = (event:any, form:any) => {
+    //SEND THE FORM
+    // SHOWS THE NOTIFICATION MESSAGE
+    console.log(form, "formformformformformformformformform");
+    // dispatch?.(setState({...form}));
+  }
+
+  const updateForm = (event:any, form:any) => {
+    const inputOjbect = JSON.parse(`{"${event.target.name}":"${event.target.value}"}`);
+    const formatedForm = {...form, ...inputOjbect}
+    handleDispatchForm(formatedForm)
+  }
+  const handleDispatchForm = useCallback((formParams:any) => {
+    dispatch?.(setState({...formDetailed, ...formParams}));
+  }, [dispatch, formDetailed]);
+
+  if(formDetailed && !formDetailed?.title){ dispatch?.(setState({...formDetailed, title: title})) };
 
   return(
     <Modal open={displayInternalModal}
@@ -41,13 +61,13 @@ export const RequestDetailedStory = ({
             noValidate
             autoComplete="off"
           >
-            <Input placeholder='Email' inputProps={ariaLabel} />
-            <Input placeholder='Name' inputProps={ariaLabel} />
+            <Input placeholder='Email' name='userEmail' defaultValue={formDetailed?.userEmail} onChange={(event) => updateForm(event, formDetailed)} inputProps={ariaLabel} />
+            <Input placeholder='User Name' name='userName' defaultValue= {formDetailed?.userName} onChange={(event) => updateForm(event, formDetailed)} inputProps={ariaLabel} />
           </Box>
         </CardContent>
 
         <CardActions>
-          <Button size="small">Submit</Button>
+          <Button size="small" onClick={(event) => submitForm(event, formDetailed)}>Submit</Button>
           <Button size="small" onClick={handleOnClose}>Close</Button>
         </CardActions>
       </Card>

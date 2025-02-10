@@ -1,0 +1,1 @@
+export const requestNewYorkStoryDetailFormSelector = (state:any) => state.requestDetailedStoryFormReducer;
