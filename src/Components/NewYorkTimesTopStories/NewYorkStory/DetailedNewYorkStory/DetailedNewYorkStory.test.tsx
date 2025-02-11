@@ -15,6 +15,7 @@ import { requestResponse, topStoryTitle, topStoryAbstract } from '../../../../te
 import * as reactRedux from 'react-redux';
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
+  useDispatch: jest.fn()
 }));
 
 const useSelectorMock = reactRedux.useSelector as jest.MockedFunction<typeof reactRedux.useSelector>;

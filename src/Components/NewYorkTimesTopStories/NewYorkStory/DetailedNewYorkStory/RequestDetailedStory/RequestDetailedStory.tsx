@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import Box from '@mui/material/Box';
@@ -12,6 +12,9 @@ import Input from '@mui/material/Input';
 import Typography from '@mui/material/Typography';
 
 import { Modal } from '../../../../Modal';
+import { Alert, AlertPropsType } from '../../../../Alert'
+
+
 
 import { newYorkSelector, requestNewYorkStoryDetailFormSelector } from '../../../../../redux/selectors';
 import { setState } from '../../../../../redux/reducers/requestNewYorkStoryDetailFormReducer';
@@ -21,19 +24,34 @@ interface RequestDetailedStoryType {
   handleOnClose: () => void,
 };
 
+const validateForm = (form:any) => {
+  let valid = true;
+
+  Object.keys(form).forEach((key) => {
+    if(!form[key]){
+      valid = false;
+    }
+  })
+  return valid;
+}
+
 export const RequestDetailedStory = ({
   displayInternalModal, handleOnClose
 }: RequestDetailedStoryType ) => {
   const { title } = useSelector(newYorkSelector, shallowEqual);
   const formDetailed = useSelector(requestNewYorkStoryDetailFormSelector, shallowEqual);
+  const alertDefaultProps: AlertPropsType = {open: false, severity: 'error'};
+
+  const [ alertProps, setAlertProps ] = useState(alertDefaultProps);
+
   const ariaLabel = { 'aria-label': 'description' };
   const dispatch = useDispatch();
 
   const submitForm = (event:any, form:any) => {
-    //SEND THE FORM
-    // SHOWS THE NOTIFICATION MESSAGE
-    console.log(form, "formformformformformformformformform");
-    // dispatch?.(setState({...form}));
+    if(!validateForm(form)) return setAlertProps({...alertDefaultProps, open: true});
+    
+    setAlertProps({...alertDefaultProps, open: false});
+    handleOnClose()
   }
 
   const updateForm = (event:any, form:any) => {
@@ -51,6 +69,7 @@ export const RequestDetailedStory = ({
     <Modal open={displayInternalModal}
       onClose={handleOnClose} ariaLabelledby='New York Story' ariaDescribedby='New York Story Form'>
       <Card sx={{ maxWidth: 345 }}>
+        <Alert alertProps={alertProps} setAlertProps={setAlertProps}/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" >
               {title}
