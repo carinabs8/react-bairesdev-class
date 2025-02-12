@@ -7,24 +7,29 @@ import CloseIcon from '@mui/icons-material/Close';
 
 export interface AlertPropsType {
   open: boolean,
-  severity?: SeverityType
-}
+  message?: string,
+  severity?: SeverityType,
+  variant?: VariantType
+};
 interface AlertType {
   alertProps: AlertPropsType,
   setAlertProps: (props: AlertPropsType) => void
-}
+};
 
 type SeverityType = 'success' | 'error' | 'warning' | 'info' | undefined;
+type VariantType = 'filled' | 'outlined' | undefined;
+
 
 export const Alert = (params: AlertType) => {
   const { alertProps, setAlertProps } = params;
-  const { open, severity } = alertProps;
+  const { open, severity, message, variant } = alertProps;
 
   return (
     <Box sx={{ width: '100%' }}>
       <Collapse in={open}>
         <MaterialAlert
-          severity={severity} 
+          severity={severity}
+          variant={variant}
           action={
             <IconButton
               aria-label="close"
@@ -39,7 +44,7 @@ export const Alert = (params: AlertType) => {
           }
           sx={{ mb: 2 }}
         >
-          Click the close icon to see the Collapse transition in action!
+          {message}
         </MaterialAlert>
       </Collapse>
     </Box>

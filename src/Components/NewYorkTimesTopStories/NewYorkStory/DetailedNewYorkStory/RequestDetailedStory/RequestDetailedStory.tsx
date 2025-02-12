@@ -21,7 +21,7 @@ import { setState } from '../../../../../redux/reducers/requestNewYorkStoryDetai
 
 interface RequestDetailedStoryType {
   displayInternalModal: boolean,
-  handleOnClose: () => void,
+  handleOnClose: (closeParentModal?:boolean) => void,
 };
 
 const validateForm = (form:any) => {
@@ -48,10 +48,10 @@ export const RequestDetailedStory = ({
   const dispatch = useDispatch();
 
   const submitForm = (event:any, form:any) => {
-    if(!validateForm(form)) return setAlertProps({...alertDefaultProps, open: true});
+    if(!validateForm(form)) return setAlertProps({...alertDefaultProps, open: true, message: 'Invalid form data'});
     
     setAlertProps({...alertDefaultProps, open: false});
-    handleOnClose()
+    handleOnClose(true)
   }
 
   const updateForm = (event:any, form:any) => {
@@ -67,7 +67,7 @@ export const RequestDetailedStory = ({
 
   return(
     <Modal open={displayInternalModal}
-      onClose={handleOnClose} ariaLabelledby='New York Story' ariaDescribedby='New York Story Form'>
+      onClose={(event) => handleOnClose()} ariaLabelledby='New York Story' ariaDescribedby='New York Story Form'>
       <Card sx={{ maxWidth: 345 }}>
         <Alert alertProps={alertProps} setAlertProps={setAlertProps}/>
         <CardContent>
@@ -87,7 +87,7 @@ export const RequestDetailedStory = ({
 
         <CardActions>
           <Button size="small" onClick={(event) => submitForm(event, formDetailed)}>Submit</Button>
-          <Button size="small" onClick={handleOnClose}>Close</Button>
+          <Button size="small" onClick={(event) => handleOnClose()}>Close</Button>
         </CardActions>
       </Card>
     </Modal>

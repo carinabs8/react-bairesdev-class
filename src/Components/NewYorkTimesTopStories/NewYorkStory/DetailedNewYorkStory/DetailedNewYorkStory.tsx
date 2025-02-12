@@ -31,8 +31,9 @@ export const DetailedNewYorkStory = ({displayModal, setDisplayModal}: DetailedNe
     setDisplayInternalModal(true);
   }
 
-  const handleDisplayInternalModalClose = () => {
+  const handleDisplayInternalModalClose = (closeParentModal?:boolean) => {
     setDisplayInternalModal(false);
+    if(closeParentModal) handleClose();
   }
 
   if(!displayModal) return null;
