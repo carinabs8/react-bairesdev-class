@@ -1,0 +1,1 @@
+export const mainAlertSelector = (state:any) => state.mainAlertReducer;

@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
-import { newYorkReducer, requestDetailedStoryFormReducer } from './reducers';
+import { newYorkReducer, requestDetailedStoryFormReducer, mainAlertReducer } from './reducers';
 
 const rootReducer = combineReducers({
-  newYorkReducer, requestDetailedStoryFormReducer
+  newYorkReducer, requestDetailedStoryFormReducer, mainAlertReducer
 });
 
 export default configureStore({

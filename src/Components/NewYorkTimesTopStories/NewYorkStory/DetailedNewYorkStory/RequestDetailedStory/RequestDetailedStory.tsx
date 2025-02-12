@@ -18,6 +18,7 @@ import { Alert, AlertPropsType } from '../../../../Alert'
 
 import { newYorkSelector, requestNewYorkStoryDetailFormSelector } from '../../../../../redux/selectors';
 import { setState } from '../../../../../redux/reducers/requestNewYorkStoryDetailFormReducer';
+import { setState as setStateMainAlert} from '../../../../../redux/reducers/mainAlertReducer';
 
 interface RequestDetailedStoryType {
   displayInternalModal: boolean,
@@ -52,6 +53,7 @@ export const RequestDetailedStory = ({
     
     setAlertProps({...alertDefaultProps, open: false});
     handleOnClose(true)
+    dispatch?.(setStateMainAlert({open: true, message: 'Request sent!', severity: 'info'}));
   }
 
   const updateForm = (event:any, form:any) => {
